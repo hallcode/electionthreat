@@ -1,0 +1,24 @@
+{
+  "name": "electionthreat",
+  "version": "1.0.0",
+  "description": "Satirical site for giving advice to the public on the current level of threat from elections.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hallcode/electionthreat.git"
+  },
+  "keywords": [
+    "election",
+    "politics",
+    "threat"
+  ],
+  "author": "hallcode",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hallcode/electionthreat/issues"
+  },
+  "homepage": "https://github.com/hallcode/electionthreat#readme"
+}
