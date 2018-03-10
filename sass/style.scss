@@ -158,10 +158,12 @@ section#alert-info {
   align-items: stretch;
 
   .election-date {
-    margin: 0.88rem 2rem;
+    margin: 0.88rem 1.33rem;
     text-align: center;
     flex: 1 1 25%;
     text-decoration: none;
+    display: flex;
+    flex-direction: column;
 
     &:hover {
       .type {
@@ -194,20 +196,39 @@ section#alert-info {
       color: darken($brand-primary, 10%);
       padding: 0.88rem 1rem;
       background-color: $grey-light;
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
 
-      &.general {
-        border-top: 3px solid $election-general;
-        color: $election-general;
+      &.gen {
+        border-top: 3px solid $election-gen;
+        color: $election-gen;
       }
 
-      &.local {
-        border-top: 3px solid $election-local;
-        color: $election-local;
+      &.lgv {
+        border-top: 3px solid $election-lgv;
+        color: $election-lgv;
       }
 
-      &.regional {
-        border-top: 3px solid $election-regional;
-        color: $election-regional;
+      &.scp {
+        border-top: 3px solid $election-scp;
+        color: $election-scp;
+      }
+
+      &.nia {
+        border-top: 3px solid $election-nia;
+        color: $election-nia;
+      }
+
+      &.naw {
+        border-top: 3px solid $election-naw;
+        color: $election-naw;
+      }
+
+      &.lma {
+        border-top: 3px solid $election-lma;
+        color: $election-lma;
       }
 
       &.pcc {
@@ -215,9 +236,9 @@ section#alert-info {
         color: $election-pcc;
       }
 
-      &.referendum {
-        border-top: 3px solid $election-referendum;
-        color: $election-referendum;
+      &.ref {
+        border-top: 3px solid $election-ref;
+        color: $election-ref;
       }
     }
 

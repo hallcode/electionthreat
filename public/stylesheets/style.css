@@ -412,10 +412,12 @@ section#alert-info .alert-container {
   justify-content: space-between;
   align-items: stretch; }
   .row .election-date {
-    margin: 0.88rem 2rem;
+    margin: 0.88rem 1.33rem;
     text-align: center;
     flex: 1 1 25%;
-    text-decoration: none; }
+    text-decoration: none;
+    display: flex;
+    flex-direction: column; }
     .row .election-date:hover .type {
       background-color: #ececec; }
     .row .election-date:hover .date, .row .election-date:hover .year {
@@ -433,22 +435,35 @@ section#alert-info .alert-container {
       border-bottom: 2px dashed #cccccc;
       color: #1e7b92;
       padding: 0.88rem 1rem;
-      background-color: #f2f2f2; }
-      .row .election-date .type.general {
-        border-top: 3px solid #35823f;
-        color: #35823f; }
-      .row .election-date .type.local {
+      background-color: #f2f2f2;
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center; }
+      .row .election-date .type.gen {
+        border-top: 3px solid #447a1c;
+        color: #447a1c; }
+      .row .election-date .type.lgv {
         border-top: 3px solid #357182;
         color: #357182; }
-      .row .election-date .type.regional {
-        border-top: 3px solid #823575;
-        color: #823575; }
+      .row .election-date .type.scp {
+        border-top: 3px solid #500778;
+        color: #500778; }
+      .row .election-date .type.nia {
+        border-top: 3px solid #547bbd;
+        color: #547bbd; }
+      .row .election-date .type.naw {
+        border-top: 3px solid #d80979;
+        color: #d80979; }
+      .row .election-date .type.lma {
+        border-top: 3px solid #ee266d;
+        color: #ee266d; }
       .row .election-date .type.pcc {
-        border-top: 3px solid #354182;
-        color: #354182; }
-      .row .election-date .type.referendum {
-        border-top: 3px solid #827235;
-        color: #827235; }
+        border-top: 3px solid #2db2be;
+        color: #2db2be; }
+      .row .election-date .type.ref {
+        border-top: 3px solid #979510;
+        color: #979510; }
     .row .election-date .date {
       font-size: 34px;
       background-color: #f9f9f9;

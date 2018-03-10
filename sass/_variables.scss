@@ -13,8 +13,11 @@
  $alert-severe:         adjust-hue($alert-substantial, $seperation);
  $alert-critical:       adjust-hue($alert-severe, $seperation);
 
- $election-general:     rgb(53, 130, 63);
- $election-local:       rgb(53, 113, 130);
- $election-regional:    rgb(130, 53, 117);
- $election-pcc:         rgb(53, 65, 130);
- $election-referendum:  rgb(130, 114, 53);
+ $election-gen:     rgb(68,122,28);
+ $election-lgv:     rgb(53, 113, 130);
+ $election-scp:     rgb(80,7,120);
+ $election-nia:     rgb(84, 123, 189);
+ $election-naw:     rgb(216, 9, 121);
+ $election-lma:     rgb(238, 38, 109);
+ $election-pcc:     rgb(45, 178, 190);
+ $election-ref:     rgb(151, 149, 16);
