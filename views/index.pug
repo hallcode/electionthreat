@@ -1,5 +1,33 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  section#alert-info.section
+    article
+      h2 Westminster General Election
+      .alert-container
+        .column
+          .alert.substantial substantial
+        .description
+          p An election is a strong possibility.
+          p Additional and sustainable protective campaigning measures reflecting the broad political landscape combined with specific parties making informed judgements on acceptable risk.
+          p.meta Last Updated: 10/05/2018
+          a.more(href="#") More Information
+      h2 UK Wide Referendum
+      .alert-container
+        .column
+          .alert.moderate Moderate
+        .description
+          p A referendum is possible, but not likely.
+          p Routine organising measures and campaigning strategies appropriate to the party concerned.
+          p.meta Last Updated: 10/05/2018
+          a.more(href="#") More Information
+      h2 Upcoming Elections
+      p Some elections happen on a regular scheduled basis; the dates for these elections, where they known, are shown below.
+      .row 
+        .column
+        .column
+        .column
+  section#news-updates.section.grey
+    article
+      h1 Latest updates
+      p We make our decisions based on political events and news, you can read out frequent assesments below.
