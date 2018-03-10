@@ -6,8 +6,15 @@
  $grey-mid:     rgb(204,204,204);
  $grey-light:   rgb(242,242,242);
 
- $alert-critical:       rgb(228,25,43);
- $alert-severe:         rgb(255,135,27);
- $alert-substantial:    rgb(226,215,24);
- $alert-moderate:       rgb(31,141,190);
- $alert-low:            rgb(226,226,226);
+ $seperation:           -22;
+ $alert-low:            hsl(85, 80%, 55%);
+ $alert-moderate:       adjust-hue($alert-low, $seperation);
+ $alert-substantial:    adjust-hue($alert-moderate, $seperation);
+ $alert-severe:         adjust-hue($alert-substantial, $seperation);
+ $alert-critical:       adjust-hue($alert-severe, $seperation);
+
+ $election-general:     rgb(53, 130, 63);
+ $election-local:       rgb(53, 113, 130);
+ $election-regional:    rgb(130, 53, 117);
+ $election-pcc:         rgb(53, 65, 130);
+ $election-referendum:  rgb(130, 114, 53);
