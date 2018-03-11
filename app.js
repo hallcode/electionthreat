@@ -5,6 +5,9 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var sassMiddleware = require('node-sass-middleware');
+var db = require('./db.js');
+
+var apiResponse = require('./app/apiResponse');
 
 var index = require('./routes/index');
 var api = require('./routes/api1');
@@ -12,6 +15,7 @@ var api = require('./routes/api1');
 var app = express();
 
 // view engine setup
+// As this is API only, this can be removed
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
@@ -49,7 +53,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.send(new apiResponse({}, req, err));
 });
 
 module.exports = app;
