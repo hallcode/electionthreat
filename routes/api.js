@@ -1,40 +1,31 @@
 var express = require('express');
-var Level = require('../models/level.js');
-var apiResponse = require('../app/apiResponse.js');
 var router = express.Router();
 
+// Controllers
+var ApiController = require('../controllers/ApiController');
+var LevelController = require('../controllers/LevelController');
+var ElectionController = require('../controllers/ElectionController');
+
+var Alert = require('../models/alert');
+var Election = require('../models/election');
+
+var Poll = require('../models/poll');
+var Post = require('../models/post');
+var Subscriber = require('../models/subscriber');
+
 /* GET index listing. */
-router.get('/', function(req, res, next)
-{
-  res.send({
-    api: {
-      title: "election-threat",
-      version: "1.0",
-      author: "Alex Hall",
-      base_url: "/api/1",
-    },
-    endpoints: {}
-  });
-});
+router.get('/', ApiController.base);
 
 /* Level(s) routes */
-// Get all
-router.get('/levels', function(req, res, next)
-{
-  Level.find({}, function(err, levels){
-    res.send(new apiResponse(levels, req, err));
-  });
-});
+router.get('/levels', LevelController.list);
+router.get('/levels/:name', LevelController.single);
 
-// Get single
-router.get('/levels/:name', function(req, res, next)
-{
-  Level.find({
-    name: req.params.name
-  }, function(err, levels){
-    res.send(new apiResponse(levels.pop(), req, err));
-  });
-});
+/* Elections(s) routes */
+router.get('/elections', ElectionController.list);
+router.get('/elections/watched', ElectionController.watched);
+router.get('/elections/:code', ElectionController.single);
+router.post('/elections', ElectionController.create);
+router.delete('/elections', ElectionController.delete);
 
 
 module.exports = router;

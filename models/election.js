@@ -18,6 +18,6 @@ var electionSchema = new Schema({
     isWatched: Boolean
 });
 
-var Election = mongoose.model('Level', electionSchema);
+var Election = mongoose.model('Election', electionSchema);
 
 module.exports = Election;
