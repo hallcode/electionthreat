@@ -5,17 +5,16 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var sassMiddleware = require('node-sass-middleware');
-var db = require('./db.js');
+var db = require('./db.js')
 
 var apiResponse = require('./app/apiResponse');
 
 var index = require('./routes/index');
-var api = require('./routes/api1');
+var api = require('./routes/api');
 
 var app = express();
 
 // view engine setup
-// As this is API only, this can be removed
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 

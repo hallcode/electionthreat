@@ -3,7 +3,7 @@ var Level = require('../models/level.js');
 var apiResponse = require('../app/apiResponse.js');
 var router = express.Router();
 
-/* GET users listing. */
+/* GET index listing. */
 router.get('/', function(req, res, next)
 {
   res.send({

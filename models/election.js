@@ -14,7 +14,6 @@ var electionSchema = new Schema({
         how: String,
         function: String,
     },
-    next_poll: Date,
     color: String,
     isWatched: Boolean
 });
