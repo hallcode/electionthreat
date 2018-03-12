@@ -4,9 +4,12 @@ const Election = require('../models/election');
 
 exports.list = function(req, res)
 {
-    Election.find({}, function(err, elections){
-        res.send(new apiResponse(elections, req, err));
-    });
+    Election.find({})
+        .select('name code')
+        .sort('order')
+        .exec(function(err, elections){
+            res.send(new apiResponse(elections, req, err));
+        });
 }
 
 exports.single = function (req, res, next)
@@ -26,7 +29,10 @@ exports.single = function (req, res, next)
 
 exports.watched = function (req, res)
 {
-    Election.find({isWatched: true}, function(err, elections){
+    Election.find({isWatched: true})
+    .select('name code')
+    .sort('order')
+    .exec(function(err, elections){
         res.send(new apiResponse(elections, req, err));
     });
 }

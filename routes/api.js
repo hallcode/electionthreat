@@ -6,13 +6,6 @@ var ApiController = require('../controllers/ApiController');
 var LevelController = require('../controllers/LevelController');
 var ElectionController = require('../controllers/ElectionController');
 
-var Alert = require('../models/alert');
-var Election = require('../models/election');
-
-var Poll = require('../models/poll');
-var Post = require('../models/post');
-var Subscriber = require('../models/subscriber');
-
 /* GET index listing. */
 router.get('/', ApiController.base);
 
