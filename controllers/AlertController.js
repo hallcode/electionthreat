@@ -7,6 +7,7 @@ var Alert = require('../models/alert');
 exports.list = function (req, res)
 {
     Alert.find({})
+    .select('election level isSetByMods date')
     .limit(100)
     .exec(function(err, alerts)
     {
@@ -22,6 +23,7 @@ exports.recentFor = function (req, res, next)
     Alert.find({
         election: req.params.election
     })
+    .select('election level isSetByMods')
     .sort('-date')
     .limit(1)
     .exec(function(err, alerts)
