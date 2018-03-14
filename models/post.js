@@ -5,6 +5,7 @@ var Schema = mongoose.Schema;
 
 var postSchema = new Schema({
     headline: String,
+    slug: { type: String, required: true },
     text: String,
     imgUrl: String,
     date: Date,

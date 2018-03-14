@@ -6,10 +6,12 @@ var ApiController = require('../controllers/ApiController');
 var AlertController = require('../controllers/AlertController');
 var ElectionController = require('../controllers/ElectionController');
 var LevelController = require('../controllers/LevelController');
-var PollController = require('../controllers/PollController')
+var PollController = require('../controllers/PollController');
+var PostController = require('../controllers/PostController');
 
 /* GET index listing. */
 router.get('/', ApiController.base);
+router.get('/docs', ApiController.docs);
 
 /* Alert routs. */
 router.get('/alerts', AlertController.list);
@@ -31,6 +33,12 @@ router.get('/levels/:name', LevelController.single);
 router.get('/polls', PollController.list);
 router.get('/polls/:election', PollController.getFor);
 router.post('/polls', PollController.create);
+
+/* Post routes */
+router.get('/posts', PostController.list);
+router.get('/posts/:year/:slug', PostController.single);
+router.post('/posts', PostController.create);
+router.delete('/posts/:id');
 
 
 module.exports = router;

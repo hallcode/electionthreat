@@ -2,11 +2,14 @@ exports.base = function(req, res)
 {
     res.send({
         api: {
-          title: "election-threat",
-          version: "1.0",
-          author: "Alex Hall",
-          base_url: "/api/1",
-        },
-        endpoints: {}
+          title: 'Election Watch',
+          help: 'Check out the documentation to learn how to use the election-watch API.',
+          docsUrl: '/api/1/docs'
+        }
       });
+}
+
+exports.docs = function(req, res)
+{
+  res.send();
 }
