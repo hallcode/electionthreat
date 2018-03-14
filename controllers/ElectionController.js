@@ -15,15 +15,17 @@ exports.list = function(req, res)
 exports.single = function (req, res, next)
 {
     Election.find({ code: req.params.code }, 
-        function(err, elections) 
-        {
+        function(err, elections) {
             if (elections.length === 0) 
             {
                 var err = new Error('Not Found');
                 err.status = 404;
                 next(err);
             }
-            res.send(new apiResponse(elections.pop(), req, err));
+            else
+            {
+                res.send(new apiResponse(elections.pop(), req, err));
+            }
         });
 }
 
@@ -40,27 +42,31 @@ exports.watched = function (req, res)
 exports.create = function (req, res, next)
 {
     if (req.body.length === 0)
-        {
-          var err = new Error('No data recieved.');
-          err.status = 400;
-          next(err);
-        }
-      
-      var newElection = new Election({
-        name: req.body.name,
-        code: req.body.code,
-        order: req.body.order,
-        color: req.body.colour,
-        isWatched: req.body.isWatched
-      });
+    {
+        var err = new Error('No data recieved.');
+        err.status = 400;
+        next(err);
+    }
+    else
+    {
+        var newElection = new Election({
+            name: req.body.name,
+            code: req.body.code,
+            order: req.body.order,
+            color: req.body.colour,
+            isWatched: req.body.isWatched
+        });
     
-      newElection.save(function(err){
-        if (err) {
-          next(err);
-        }
-      });
-    
-      res.send(new apiResponse(newElection, req, err));
+        newElection.save(function(err){
+            if (err) {
+                next(err);
+            }
+            else
+            {
+                res.send(new apiResponse(newElection, req, err));
+            }
+        });
+    }
 }
 
 exports.delete = function (req, res)

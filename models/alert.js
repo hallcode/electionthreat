@@ -7,7 +7,7 @@ var alertSchema = new Schema({
     date: Date,
     election: String,
     level: String,
-    isRegular: Boolean
+    isSetByMods: Boolean
 });
 
 var Alert = mongoose.model('Alert', alertSchema);

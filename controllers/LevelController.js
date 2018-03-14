@@ -24,6 +24,9 @@ exports.single = function (req, res, next)
             err.status = 404;
             next(err);
         }
-        res.send(new apiResponse(levels.pop(), req, err));
+        else
+        {
+            res.send(new apiResponse(levels.pop(), req, err));            
+        }
     });
 }
