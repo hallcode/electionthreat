@@ -34,10 +34,17 @@ exports.getFor = function(req, res) {
 };
 
 exports.create = function(req, res, next) {
-    if (req.body.length === 0)
+    req.check('year', 'You must provide a valid year, in the future.').exists().isInt({min: new Date().getFullYear()});
+    req.check('month', 'You must provide a valid month.').exists().isInt({max: 12, min: 1});
+    req.check('day', 'You must provide a valid day.').exists().isInt({min: 1, max: 31});
+    req.check('election', 'You must specify an election type.').exists();
+
+    var errors = req.validationErrors();    
+    if (err)
     {
-        var err = new Error('No data recieved.');
+        var err = new Error('Invalid input.');
         err.status = 400;
+        err.validation = errors;
         next(err);
     }
     else

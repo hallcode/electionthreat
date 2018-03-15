@@ -34,11 +34,16 @@ exports.single = function(req, res, next)
 
 exports.create = function(req, res, next)
 {
-    if (req.body.length === 0)
+    req.check('headline', 'You must provide a valid headline.').isAlphanumeric('en-GB');
+    req.check('text', 'The post must contain some text.').exists();
+    req.check('imgUrl', 'The image link must be a valid URL.').isURL();
+    
+    var err = req.validationErrors();
+    if (err)
     {
-        console.log('Error')
-        var err = new Error('No data recieved.');
+        var err = new Error('Invalid input.');
         err.status = 400;
+        err.validation = errors;
         next(err);
     }
     else
@@ -67,10 +72,23 @@ exports.create = function(req, res, next)
 
 exports.delete = function(req, res)
 {
-    Post.remove({
-        _id: req.params.id
-    })
-    .then(function(){
-        res.status(204).send();
-    })
+    req.check('_id', 'You must provide a valid ID.').isMongoId();
+    
+    var err = req.validationErrors();
+    if (err)
+    {
+        var err = new Error('Invalid input.');
+        err.status = 400;
+        err.validation = errors;
+        next(err);
+    }
+    else
+    {
+        Post.remove({
+            _id: req.params.id
+        })
+        .then(function(){
+            res.status(204).send();
+        })
+    }
 }

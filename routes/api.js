@@ -1,5 +1,9 @@
 var express = require('express');
-var router = express.Router();
+var expressValidator = require('express-validator');
+var api = express.Router();
+
+api.use(expressValidator());
+const { check, validationResult } = require('express-validator/check');
 
 // Controllers
 var ApiController = require('../controllers/ApiController');
@@ -12,41 +16,41 @@ var PageController = require('../controllers/PageController');
 var SubscriberController = require('../controllers/SubscriberController');
 
 /* GET index listing. */
-router.get('/', ApiController.base);
-router.get('/docs', ApiController.docs);
+api.get('/', ApiController.base);
+api.get('/docs', ApiController.docs);
 
 /* Alert routs. */
-router.get('/alerts', AlertController.list);
-router.get('/alerts/:election', AlertController.recentFor);
-router.post('/alerts', AlertController.create);
+api.get('/alerts', AlertController.list);
+api.get('/alerts/:election', AlertController.recentFor);
+api.post('/alerts', AlertController.create);
 
 /* Elections routes */
-router.get('/elections', ElectionController.list);
-router.get('/elections/watched', ElectionController.watched);
-router.get('/elections/:code', ElectionController.single);
+api.get('/elections', ElectionController.list);
+api.get('/elections/watched', ElectionController.watched);
+api.get('/elections/:code', ElectionController.single);
 
 /* Level routes */
-router.get('/levels', LevelController.list);
-router.get('/levels/:name', LevelController.single);
+api.get('/levels', LevelController.list);
+api.get('/levels/:name', LevelController.single);
 
 /* Poll routes */
-router.get('/polls', PollController.list);
-router.get('/polls/:election', PollController.getFor);
-router.post('/polls', PollController.create);
+api.get('/polls', PollController.list);
+api.get('/polls/:election', PollController.getFor);
+api.post('/polls', PollController.create);
 
 /* Post routes */
-router.get('/posts', PostController.list);
-router.get('/posts/:year/:slug', PostController.single);
-router.post('/posts', PostController.create);
-router.delete('/posts/:id', PostController.delete);
+api.get('/posts', PostController.list);
+api.get('/posts/:year/:slug', PostController.single);
+api.post('/posts', PostController.create);
+api.delete('/posts/:id', PostController.delete);
 
 /* Static Page Routes */
-router.get('/pages', PageController.list);
-router.get('/pages/:title', PageController.static);
+api.get('/pages', PageController.list);
+api.get('/pages/:title', PageController.static);
 
 /* Subscriber routes */
-router.post('/subscribe', SubscriberController.subscribe);
-router.post('/unsubscribe', SubscriberController.unsubscribe);
+api.post('/subscribe', SubscriberController.subscribe);
+api.post('/unsubscribe', SubscriberController.unsubscribe);
 
 
-module.exports = router;
+module.exports = api;

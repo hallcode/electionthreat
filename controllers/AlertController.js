@@ -46,10 +46,17 @@ exports.recentFor = function (req, res, next)
  */
 exports.create = function(req, res, next)
 {
-    if (req.body.length === 0)
+    // Validation
+    req.check('election', 'You must specify an election.').exists();
+    req.check('levels', 'You must specify a new alert level.').exists();
+
+    var errors = req.validationErrors();
+
+    if (err)
     {
-        var err = new Error('No data recieved.');
+        var err = new Error('Invalid input.');
         err.status = 400;
+        err.validation = errors;
         next(err);
     }
     else
@@ -70,6 +77,5 @@ exports.create = function(req, res, next)
                 res.send(new apiResponse(newAlert, req, err));  
             }
         });
- 
     }
 }
