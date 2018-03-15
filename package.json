@@ -4,13 +4,14 @@
   "description": "Satirical site for giving advice to the public on the current level of threat from elections.",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "test": "snyk test"
   },
   "dependencies": {
     "body-parser": "~1.18.2",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
-    "express": "~4.15.5",
+    "express": "^4.16.0",
     "express-validator": "^5.0.3",
     "helmet": "^3.12.0",
     "mongoose": "^5.0.9",
@@ -35,5 +36,8 @@
   "bugs": {
     "url": "https://github.com/hallcode/electionthreat/issues"
   },
-  "homepage": "https://github.com/hallcode/electionthreat#readme"
+  "homepage": "https://github.com/hallcode/electionthreat#readme",
+  "devDependencies": {
+    "snyk": "^1.70.1"
+  }
 }
