@@ -9,11 +9,6 @@ var subscriberSchema = new Schema({
     criticalOnly: Boolean
 });
 
-subscriberSchema.pre('save', function(next){
-    var now = new Date();
-    this.date = now;
-});
-
 var Subscriber = mongoose.model('Subscriber', subscriberSchema);
 
 module.exports = Subscriber;
