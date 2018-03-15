@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 
 var postSchema = new Schema({
     headline: String,
-    slug: { type: String, required: true },
+    slug: String,
     text: String,
     imgUrl: String,
     date: Date,
@@ -15,6 +15,7 @@ var postSchema = new Schema({
 postSchema.pre('save', function(next){
     var now = new Date();
     this.date = now;
+    next();
 });
 
 var Post = mongoose.model('Post', postSchema);

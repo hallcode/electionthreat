@@ -36,36 +36,41 @@ exports.create = function(req, res, next)
 {
     if (req.body.length === 0)
     {
+        console.log('Error')
         var err = new Error('No data recieved.');
         err.status = 400;
         next(err);
     }
+    else
+    {
+        var slug = slugify(req.body.headline);
 
-    var newPost = new Post({
-        headline: req.body.headline,
-        slug: slugify(req.body.headline),
-        text: req.body.text,
-        imgUrl: req.body.imgUrl || null,
-        date: new Date(),
-        alert: req.body.alert || null
-    });
-
-    newPost.save(function(err){
-        if (err) {
-            next(err);
-        }
-        else
-        {
-            res.send(new apiResponse(newPost, req, err));
-        }
-    });
+        var newPost = new Post({
+            headline: req.body.headline,
+            slug: slug.toLowerCase(),
+            text: req.body.text,
+            imgUrl: req.body.imgUrl || null,
+            alert: req.body.alert || null
+        })
+        .save(function(err, post){
+            if (err) {
+                next(err);
+            }
+            else
+            {
+                res.send(new apiResponse(post, req, err));  
+            }
+        });
+    }
+    
 }
 
 exports.delete = function(req, res)
 {
     Post.remove({
         _id: req.params.id
-    });
-
-    res.send(new apiResponse([], req, err));
+    })
+    .then(function(){
+        res.status(204).send();
+    })
 }

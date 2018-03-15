@@ -8,6 +8,7 @@ var ElectionController = require('../controllers/ElectionController');
 var LevelController = require('../controllers/LevelController');
 var PollController = require('../controllers/PollController');
 var PostController = require('../controllers/PostController');
+var PageController = require('../controllers/PageController');
 
 /* GET index listing. */
 router.get('/', ApiController.base);
@@ -38,7 +39,11 @@ router.post('/polls', PollController.create);
 router.get('/posts', PostController.list);
 router.get('/posts/:year/:slug', PostController.single);
 router.post('/posts', PostController.create);
-router.delete('/posts/:id');
+router.delete('/posts/:id', PostController.delete);
+
+/* Static Page Routes */
+router.get('/pages', PageController.list);
+router.get('/pages/:title', PageController.static);
 
 
 module.exports = router;
