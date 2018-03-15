@@ -38,8 +38,8 @@ exports.create = function(req, res, next)
     req.check('text', 'The post must contain some text.').exists();
     req.check('imgUrl', 'The image link must be a valid URL.').isURL();
     
-    var err = req.validationErrors();
-    if (err)
+    var errors = req.validationErrors();
+    if (errors)
     {
         var err = new Error('Invalid input.');
         err.status = 400;
@@ -74,8 +74,8 @@ exports.delete = function(req, res)
 {
     req.check('_id', 'You must provide a valid ID.').isMongoId();
     
-    var err = req.validationErrors();
-    if (err)
+    var errors = req.validationErrors();
+    if (errors)
     {
         var err = new Error('Invalid input.');
         err.status = 400;

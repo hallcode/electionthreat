@@ -40,7 +40,7 @@ exports.create = function(req, res, next) {
     req.check('election', 'You must specify an election type.').exists();
 
     var errors = req.validationErrors();    
-    if (err)
+    if (errors)
     {
         var err = new Error('Invalid input.');
         err.status = 400;

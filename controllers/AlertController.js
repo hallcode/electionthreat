@@ -52,7 +52,7 @@ exports.create = function(req, res, next)
 
     var errors = req.validationErrors();
 
-    if (err)
+    if (errors)
     {
         var err = new Error('Invalid input.');
         err.status = 400;
