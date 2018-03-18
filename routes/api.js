@@ -2,6 +2,10 @@ var express = require('express');
 var expressValidator = require('express-validator');
 var api = express.Router();
 
+var Limiter = require('express-rate-limiter');
+var MemoryStore = require('express-rate-limiter/lib/memoryStore');
+var limiter = new Limiter({ db : new MemoryStore() });
+
 api.use(expressValidator());
 const { check, validationResult } = require('express-validator/check');
 
@@ -18,7 +22,7 @@ var PageController = require('../controllers/PageController');
 var SubscriberController = require('../controllers/SubscriberController');
 
 /* Auth & User Routes */
-api.post('/auth', Auth.login);
+api.post('/auth', limiter.middleware(limiter), Auth.login);
 api.post('/auth/create-mod', UserController.createMod);
 
 /* GET index listing. */
