@@ -4,22 +4,17 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var sassMiddleware = require('node-sass-middleware');
 var helmet = require('helmet');
 var db = require('./db.js')
 
 var apiResponse = require('./app/apiResponse');
 
-var index = require('./routes/index');
+// Routes
 var api = require('./routes/api');
 
 var app = express();
 
 app.enable('trust proxy');
-
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -28,14 +23,6 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(sassMiddleware({
-  src: path.join(__dirname, 'sass'),
-  dest: path.join(__dirname, 'public/stylesheets'),
-  indentedSyntax: false, // true = .sass and false = .scss
-  sourceMap: true,
-  prefix: '/stylesheets',
-  debug: true
-}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.all('/*', function(req, res, next) {
@@ -52,9 +39,12 @@ app.all('/*', function(req, res, next) {
 });
 
 app.use('/api/1', api);
-app.use('/', index);
 
-// No 404 because every page not matched by the API will be forwarded to the front-end.
+app.all('/*', function(req, res, next) {
+  err = new Error('The requested resources was not found.')
+  err.status = 404;
+  res.status(err.status).send(new apiResponse([], req, err));
+});
 
 // error handler
 app.use(function(err, req, res, next) {
