@@ -1,6 +1,6 @@
 {
   "name": "electionthreat",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Satirical site for giving advice to the public on the current level of threat from elections.",
   "private": true,
   "scripts": {
