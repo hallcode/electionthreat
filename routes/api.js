@@ -6,6 +6,8 @@ api.use(expressValidator());
 const { check, validationResult } = require('express-validator/check');
 
 // Controllers
+var Auth = require('../controllers/AuthController');
+var UserController = require('../controllers/UserController');
 var ApiController = require('../controllers/ApiController');
 var AlertController = require('../controllers/AlertController');
 var ElectionController = require('../controllers/ElectionController');
@@ -14,6 +16,10 @@ var PollController = require('../controllers/PollController');
 var PostController = require('../controllers/PostController');
 var PageController = require('../controllers/PageController');
 var SubscriberController = require('../controllers/SubscriberController');
+
+/* Auth & User Routes */
+api.post('/auth', Auth.login);
+api.post('/auth/create-mod', UserController.createMod);
 
 /* GET index listing. */
 api.get('/', ApiController.base);
