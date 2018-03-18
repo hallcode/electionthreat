@@ -1,6 +1,7 @@
 var apiResponse = require('../app/apiResponse.js');
 var Post = require('../models/post');
 var slugify = require('slugify');
+var Auth = require('../controllers/AuthController');
 
 exports.list = function(req, res)
 {
@@ -34,61 +35,80 @@ exports.single = function(req, res, next)
 
 exports.create = function(req, res, next)
 {
-    req.check('headline', 'You must provide a valid headline.').isAlphanumeric('en-GB');
-    req.check('text', 'The post must contain some text.').exists();
-    req.check('imgUrl', 'The image link must be a valid URL.').isURL();
-    
-    var errors = req.validationErrors();
-    if (errors)
-    {
-        var err = new Error('Invalid input.');
-        err.status = 400;
-        err.validation = errors;
-        next(err);
-    }
-    else
-    {
-        var slug = slugify(req.body.headline);
-
-        var newPost = new Post({
-            headline: req.body.headline,
-            slug: slug.toLowerCase(),
-            text: req.body.text,
-            imgUrl: req.body.imgUrl || null,
-            alert: req.body.alert || null
-        })
-        .save(function(err, post){
-            if (err) {
+    Auth.verifyToken(req, function(err, user) {
+        if (err || !user.isMod)
+        {
+            err.status = 401;
+            next(err);
+        }
+        else
+        {
+            req.check('headline', 'You must provide a valid headline.').isAlphanumeric('en-GB');
+            req.check('text', 'The post must contain some text.').exists();
+            req.check('imgUrl', 'The image link must be a valid URL.').isURL();
+            
+            var errors = req.validationErrors();
+            if (errors)
+            {
+                var err = new Error('Invalid input.');
+                err.status = 400;
+                err.validation = errors;
                 next(err);
             }
             else
             {
-                res.send(new apiResponse(post, req, err));  
+                var slug = slugify(req.body.headline);
+        
+                var newPost = new Post({
+                    headline: req.body.headline,
+                    slug: slug.toLowerCase(),
+                    text: req.body.text,
+                    imgUrl: req.body.imgUrl || null,
+                    alert: req.body.alert || null
+                })
+                .save(function(err, post){
+                    if (err) {
+                        next(err);
+                    }
+                    else
+                    {
+                        res.send(new apiResponse(post, req, err));  
+                    }
+                });
             }
-        });
-    }
-    
+        }
+    });
 }
 
 exports.delete = function(req, res)
 {
-    req.check('_id', 'You must provide a valid ID.').isMongoId();
+    Auth.verifyToken(req, function(err, user) {
+        if (err || !user.isMod)
+        {
+            err.status = 401;
+            next(err);
+        }
+        else
+        {
+            req.check('_id', 'You must provide a valid ID.').isMongoId();
     
-    var errors = req.validationErrors();
-    if (errors)
-    {
-        var err = new Error('Invalid input.');
-        err.status = 400;
-        err.validation = errors;
-        next(err);
-    }
-    else
-    {
-        Post.remove({
-            _id: req.params.id
-        })
-        .then(function(){
-            res.status(204).send();
-        })
-    }
+            var errors = req.validationErrors();
+            if (errors)
+            {
+                var err = new Error('Invalid input.');
+                err.status = 400;
+                err.validation = errors;
+                next(err);
+            }
+            else
+            {
+                Post.remove({
+                    _id: req.params.id
+                })
+                .then(function(){
+                    res.status(204).send();
+                })
+            }
+        }
+    });
 }
