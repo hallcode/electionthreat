@@ -2,7 +2,7 @@
 Description=ElectionWatch
 
 [Service]
-ExecStart=/var/www/electionwatch/node/app.js
+ExecStart=~/electionthreat/bin/www
 Restart=always
 User=nobody
 # Note RHEL/Fedora uses 'nobody', Debian/Ubuntu uses 'nogroup'

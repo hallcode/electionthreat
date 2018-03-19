@@ -11,7 +11,8 @@ var userSchema = new Schema({
 });
 
 userSchema.pre('save', function(next){
-    this.password = bcrypt.hashSync(this.password, 10);
+    var salt = bcrypt.genSaltSync(9);
+    this.password = bcrypt.hashSync(this.password, salt);
     next();
 });
 
