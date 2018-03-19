@@ -10,7 +10,7 @@ Group=nogroup
 Environment=PATH=/usr/bin:/usr/local/bin
 Environment=NODE_ENV=production
 Environment=PORT=3001
-WorkingDirectory=/var/www/electionwatch/node
+WorkingDirectory=~/electionthreat
 
 [Install]
 WantedBy=multi-user.target
