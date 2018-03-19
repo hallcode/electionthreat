@@ -1,4 +1,4 @@
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcrypt-nodejs');
 var jwt = require('jwt-simple');
 var appVars = require('../vars.js');
 var User = require('../models/user');
